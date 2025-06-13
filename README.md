@@ -225,9 +225,6 @@ Add to your Claude Desktop configuration:
 src/
 ├── server.ts          # Main MCP server with all 32 tools
 ├── index.ts           # Entry point and environment setup
-build/                 # Compiled TypeScript output
-├── server.js          # Compiled server
-├── index.js           # Compiled entry point
 ```
 
 ### **Error Handling**
