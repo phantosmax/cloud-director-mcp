@@ -548,6 +548,15 @@ class VmwareCloudDirectorMCPServer {
               },
             },
           },
+          {
+            name: 'health_check',
+            description: 'Check VMware Cloud Director connection status',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+              required: []
+            },
+          },
         ],
       };
     });
@@ -667,6 +676,24 @@ class VmwareCloudDirectorMCPServer {
           
           case 'get_resource_metrics':
             return await this.handleGetResourceMetrics(typedArgs?.vdcId, typedArgs?.metricType);
+          
+          case 'health_check':
+            try {
+              await this.ensureAuthenticated();
+              return {
+                content: [{
+                  type: 'text',
+                  text: `✅ VMware Cloud Director connection: OK\n📊 Connected to: ${this.config.baseUrl}\n🏢 Organization: ${this.config.org}\n📅 Session expires: ${this.session?.expires}`
+                }]
+              };
+            } catch (error) {
+              return {
+                content: [{
+                  type: 'text',
+                  text: `❌ Health check failed: ${error instanceof Error ? error.message : String(error)}`
+                }]
+              };
+            }
           
           default:
             throw new McpError(
