@@ -297,6 +297,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - VMware for the Cloud Director API
 - Anthropic for the Model Context Protocol
+- zettagrid.com team for the test environment
 - The open-source community for tools and libraries
 
 ---
